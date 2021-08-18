@@ -7,7 +7,7 @@ layout: _regular_page.njk
     display: none !important;
   }
 </style>
-<section x-data="handlePanels()" class="pt-12 pb-32 mx-auto bg-red-300 max-w-screen-3xl px-u2-pad">
+<section x-data="handlePanels()" class="h-screen py-8 mx-auto bg-red-300 max-w-screen-3xl px-u2-pad">
   <p>Set state to:</p>
   <button 
     class="p-2 my-4 bg-blue-500 rounded-md shadow-md hover:bg-green-400"
@@ -25,32 +25,31 @@ layout: _regular_page.njk
 
   <div class="relative w-1/2 mt-12 ">
 
-    <div x-show.transition.opacity="checkStatus('loading')" class="absolute inset-0 bg-gray-200" >
-      <div class="flex flex-col items-center justify-center h-full">
-        <p class="text ">Loading form</p>
-        <img class="w-12 h-12 mt-4" src="/images/spinner.svg" alt="">
+    <div  x-show.transition.opacity.duration.1000ms="checkStatus('loading')" class="absolute inset-0 " >
+      <div class="p-8 bg-green-200">
+        <p>Loading form</p>
       </div>
     </div>
 
-    <div x-show.transition.opacity="checkStatus('form')" id="showingForm" class="bg-gray-200 " >
-      <form  id='formTest' name="" data-pageurl="{{page.url}}" class="p-8">
+    <div  x-cloak x-show.transition.opacity.duration.1000ms="checkStatus('form')" class="" >
+      <form  id='formTest' name="" data-pageurl="{{page.url}}" class="p-8 bg-yellow-100">
 
         <label for="first_name" class="block">First name</label>
-        <input name="first_name" id="first_name" type="text" value="" data-rules='["required"]' autocomplete="given-name" class="form-input-text" >
+        <input name="first_name" id="first_name" type="text" class="form-input-text" >
 
         <label for="email" class="block">Email</label>
-        <input  name="email" id="email" type="text"  data-rules='["required","email"]' autocomplete="email" class="form-input-text" >
+        <input  name="email" id="email" type="text"   class="form-input-text" >
 
         <label  for="position" class="block" >Position</label>
-        <input  name="position" id="position"   type="text" value="" autocomplete="" class="form-input-text" >
-
-        <button id='' @click.prevent="submit" class="block px-8 py-2 mt-4 bg-red-400 rounded-md">Hit me up</button>
+        <input  name="position" id="position"   type="text" class="form-input-text" >
 
       </form>
     </div>
 
-    <div x-show.transition.opacity="checkStatus('thankYou')" id="postSubmit" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-200" >
-      <p class="text-4xl">Thank you</p>
+    <div  x-show.transition.opacity.duration.1000ms="checkStatus('thankYou')" class="absolute inset-0" >
+      <div class="p-8 bg-purple-200">
+        <p>Thank you</p>
+      </div>
     </div>
 
   </section>
